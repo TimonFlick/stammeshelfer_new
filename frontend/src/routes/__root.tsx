@@ -104,7 +104,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     { to: '/', label: 'Home' },
     { to: '/posts', label: 'Posts', exact: true },
     { to: '/about', label: 'About' },
-  ].concat(user ? [{ to: '/logout', label: 'Logout' }] : [{ to: '/login', label: 'Login' }])
+  ].concat(user ? [{ to: '/logout', label: 'Logout' }] : [{ to: '/login', label: 'Login' },{ to: '/signUp', label: 'Signup' }])
 
   return (
     <html>
