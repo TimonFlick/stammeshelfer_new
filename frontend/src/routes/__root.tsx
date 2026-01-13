@@ -14,6 +14,11 @@ import { NotFound } from '../components/NotFound'
 import appCss from '../styles/app.css?url'
 import { seo } from '../utils/seo'
 import { getSupabaseServerClient } from '../utils/supabase'
+import { MainNav } from '~/components/navigation/main-nav'
+import { RouterButton } from '~/components/ui/router-button'
+import { RouterSheet } from '~/components/ui/router-sheet'
+import { Button } from '@/components/ui/button'
+
 
 const fetchUser = createServerFn({ method: 'GET' }).handler(async () => {
   const supabase = getSupabaseServerClient()
@@ -95,6 +100,11 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const { user } = Route.useRouteContext()
+  const navItems = [
+    { to: '/', label: 'Home' },
+    { to: '/posts', label: 'Posts', exact: true },
+    { to: '/about', label: 'About' },
+  ].concat(user ? [{ to: '/logout', label: 'Logout' }] : [{ to: '/login', label: 'Login' },{ to: '/signUp', label: 'Signup' }])
 
   return (
     <html>
@@ -102,36 +112,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <div className="p-2 flex gap-2 text-lg">
-          <Link
-            to="/"
-            activeProps={{
-              className: 'font-bold',
-            }}
-            activeOptions={{ exact: true }}
-          >
-            Home
-          </Link>{' '}
-          <Link
-            to="/posts"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Posts
-          </Link>
-          <div className="ml-auto">
-            {user ? (
-              <>
-                <span className="mr-2">{user.email}</span>
-                <Link to="/logout">Logout</Link>
-              </>
-            ) : (
-              <Link to="/login">Login</Link>
-            )}
-          </div>
-        </div>
-        <hr />
+      <div className="container mx-auto p-4 flex flex-row" >
+       <MainNav items={navItems} className="mb-8" />
+       </div>
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
