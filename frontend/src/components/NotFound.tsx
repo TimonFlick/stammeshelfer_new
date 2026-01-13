@@ -21,5 +21,5 @@ export function NotFound({ children }: { children?: React.ReactNode }) {
         </Link>
       </p>
     </div>
-  )
+  );
 }
