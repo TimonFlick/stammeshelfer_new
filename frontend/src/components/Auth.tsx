@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { ActionButton } from "@/components/ui/actionButton";
 import { Input } from "@/components/ui/input";
 
 export function Auth({
@@ -25,9 +25,9 @@ export function Auth({
         >
           <Input type="email" name="email" id="email" placeholder="Email" />
           <Input type="password" name="password" id="password" />
-          <Button type="submit" disabled={status === "pending"}>
+          <ActionButton type="submit" loading={status === "pending"}>
             {status === "pending" ? "..." : actionText}
-          </Button>
+          </ActionButton>
           {afterSubmit ? afterSubmit : null}
         </form>
       </div>
