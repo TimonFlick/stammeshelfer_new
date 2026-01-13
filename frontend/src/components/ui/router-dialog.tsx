@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,15 +6,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
+} from "@/components/ui/dialog";
 
 interface RouterDialogProps {
-  children: React.ReactNode
-  trigger: React.ReactNode
-  title: string
-  description?: string
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
+  children: React.ReactNode;
+  trigger: React.ReactNode;
+  title: string;
+  description?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function RouterDialog({
@@ -25,10 +25,10 @@ export function RouterDialog({
   open: controlledOpen,
   onOpenChange,
 }: RouterDialogProps) {
-  const [internalOpen, setInternalOpen] = React.useState(false)
+  const [internalOpen, setInternalOpen] = React.useState(false);
 
-  const open = controlledOpen ?? internalOpen
-  const setOpen = onOpenChange ?? setInternalOpen
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = onOpenChange ?? setInternalOpen;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -41,5 +41,5 @@ export function RouterDialog({
         <div className="mt-4">{children}</div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

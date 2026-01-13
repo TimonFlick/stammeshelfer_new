@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from "react";
 import {
   Sheet,
   SheetContent,
@@ -6,14 +6,14 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet'
+} from "@/components/ui/sheet";
 
 interface RouterSheetProps {
-  children: React.ReactNode
-  trigger: React.ReactNode
-  title: string
-  description?: string
-  onOpenChange?: (open: boolean) => void
+  children: React.ReactNode;
+  trigger: React.ReactNode;
+  title: string;
+  description?: string;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function RouterSheet({
@@ -23,12 +23,12 @@ export function RouterSheet({
   description,
   onOpenChange,
 }: RouterSheetProps) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen)
-    onOpenChange?.(newOpen)
-  }
+    setOpen(newOpen);
+    onOpenChange?.(newOpen);
+  };
 
   return (
     <Sheet open={open} onOpenChange={handleOpenChange}>
@@ -41,5 +41,5 @@ export function RouterSheet({
         <div className="mt-4">{children}</div>
       </SheetContent>
     </Sheet>
-  )
+  );
 }
