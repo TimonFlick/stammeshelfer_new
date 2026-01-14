@@ -8,7 +8,7 @@ export function NotFound({ children }: { children?: React.ReactNode }) {
       <div className="text-gray-600 dark:text-gray-400">
         {children || <Text>The page you are looking for does not exist.</Text>}
       </div>
-      <Text >
+      <Text>
         <ActionButton onClick={() => window.history.back()} variant="outline">
           Go back
         </ActionButton>

@@ -45,7 +45,7 @@ export function Login() {
             {loginMutation.data.error &&
             loginMutation.data.message === "Invalid login credentials" ? (
               <ActionButton
-                 onClick={(e) => {
+                onClick={(e) => {
                   const formData = new FormData(
                     (e.target as HTMLButtonElement).form!
                   );

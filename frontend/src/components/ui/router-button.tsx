@@ -1,9 +1,10 @@
 import { createLink } from "@tanstack/react-router";
-import { Button, type ButtonProps } from "@/components/ui/button";
+import { ActionButton } from "@/components/ui/actionButton";
+import { ActionButtonProps } from "@/components/ui/actionButton";
 import { forwardRef } from "react";
 
 export const RouterButton = createLink(
-  forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-    return <Button ref={ref} {...props} />;
+  forwardRef<HTMLButtonElement, ActionButtonProps>((props, ref) => {
+    return <ActionButton ref={ref} {...props} />;
   })
 );
