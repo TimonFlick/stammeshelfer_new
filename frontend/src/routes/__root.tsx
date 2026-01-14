@@ -14,7 +14,7 @@ import appCss from "../styles/app.css?url";
 import { seo } from "../utils/seo";
 import { getSupabaseServerClient } from "../utils/supabase";
 import { MainNav } from "~/components/navigation/main-nav";
-import { jwtDecode } from 'jwt-decode'
+import { getUserWithRoles } from '../utils/auth'
 
 declare module "jwt-decode" {
   export interface JwtPayload {
@@ -23,25 +23,8 @@ declare module "jwt-decode" {
 }
 
 const fetchUser = createServerFn({ method: "GET" }).handler(async () => {
-  const supabase = getSupabaseServerClient();
-
-  const { subscription: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-    if (session) {
-      const jwt = jwtDecode(session.access_token)
-      return jwt.user_roles
-    }
-  })
-
-  
-  const { data, error: _error } = await supabase.auth.getUser();
-  console.log(data);
-  if (!data.user?.email) {
-    return null;
-  }
-
-  return {
-    email: data.user.email,
-  };
+  const user = await getUserWithRoles()
+  return user
 });
 
 export const Route = createRootRoute({
@@ -111,6 +94,8 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const { user } = Route.useRouteContext();
+  console.log(user)
+  
   const navItems = [
     { to: "/", label: "Home" },
     { to: "/posts", label: "Posts", exact: true },
