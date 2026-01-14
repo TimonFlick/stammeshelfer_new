@@ -14,17 +14,17 @@ import appCss from "../styles/app.css?url";
 import { seo } from "../utils/seo";
 import { getSupabaseServerClient } from "../utils/supabase";
 import { MainNav } from "~/components/navigation/main-nav";
-import { getUserWithRoles } from '../utils/auth'
+import { getUser } from "../utils/auth";
 
 declare module "jwt-decode" {
   export interface JwtPayload {
-      user_roles: string[];
+    user_roles: string[];
   }
 }
 
 const fetchUser = createServerFn({ method: "GET" }).handler(async () => {
-  const user = await getUserWithRoles()
-  return user
+  const user = await getUser();
+  return user;
 });
 
 export const Route = createRootRoute({
@@ -93,31 +93,13 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const { user } = Route.useRouteContext();
-  console.log(user)
-  
-  const navItems = [
-    { to: "/", label: "Home" },
-    { to: "/posts", label: "Posts", exact: true },
-    { to: "/about", label: "About" },
-  ].concat(
-    user
-      ? [{ to: "/logout", label: "Logout" }]
-      : [
-          { to: "/login", label: "Login" },
-          { to: "/signUp", label: "Signup" },
-        ]
-  );
-
   return (
     <html>
       <head>
         <HeadContent />
       </head>
       <body>
-        <div className="container mx-auto p-4 flex flex-row">
-          <MainNav items={navItems} className="mb-8" />
-        </div>
+        <MainNav className="mb-8 p-6" />
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
