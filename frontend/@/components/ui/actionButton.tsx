@@ -7,6 +7,6 @@ export interface ActionButtonProps extends ButtonProps {
 }
 
 export function ActionButton(props: ActionButtonProps) {
-  const {loading, children} = props
-  return loading ? <Button {...props}> <Spinner /> {children} </Button> : <Button {...props} /> 
+  const {loading, children, ...rest}  = props
+  return loading ? <Button {...rest}> <Spinner /> {children} </Button> : <Button {...rest} >{children}</Button> 
 }

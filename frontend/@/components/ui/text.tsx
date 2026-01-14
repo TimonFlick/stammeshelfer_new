@@ -1,3 +1,5 @@
+import * as React from "react"
+
 type variant = "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export function Text({ children, variant = "p" }: { children: React.ReactNode, variant?: variant }) {
